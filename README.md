@@ -2,10 +2,6 @@
 
 [**V2Ray**](https://github.com/v2fly/v2ray-core) 路由规则文件加强版，可代替 V2Ray 官方 `geoip.dat` 和 `geosite.dat` 规则文件，兼容 [Trojan-Go](https://github.com/p4gefau1t/trojan-go) 和 [Shadowsocks-windows](https://github.com/shadowsocks/shadowsocks-windows)。利用 GitHub Actions 北京时间每天早上 6 点自动构建，保证规则最新。
 
-## 说明
-
-[Fork](https://github.com/Loyalsoldier/v2ray-rules-dat/fork) 本项目后，需要在自己仓库的 **[Settings]** 选项卡的 **[Secrets]** 页面中添加一个名为 **MAXMIND_GEOLITE2_LICENSE** 的 secret，否则 GitHub Actions 会运行失败。这个 secret 的值为 MAXMIND 账号的 LICENSE KEY，需要[**注册 MAXMIND 账号**](https://www.maxmind.com/en/geolite2/signup)后，在[**个人账号管理页面**](https://www.maxmind.com/en/account)左侧边栏的 **[Services]** 项下的 **[My License Key]** 里生成。
-
 ## 规则文件生成方式
 
 ### geoip.dat
@@ -32,6 +28,12 @@
 - **加入 AdGuard DNS Filter 广告域名**：通过 [@AdGuard/DNS-filter](https://kb.adguard.com/en/general/adguard-ad-filters#dns-filter) 获取并加入到 `geosite:category-ads-all` 类别中
 - **加入 Peter Lowe 广告和隐私跟踪域名**：通过 [@PeterLowe/adservers](https://pgl.yoyo.org/adservers) 获取并加入到 `geosite:category-ads-all` 类别中
 - **加入 Dan Pollock 广告域名**：通过 [@DanPollock/hosts](https://someonewhocares.org/hosts) 获取并加入到 `geosite:category-ads-all` 类别中
+- **加入 Windows 操作系统相关的系统升级和隐私跟踪域名**：
+  - 基于 [@crazy-max/WindowsSpyBlocker](https://github.com/crazy-max/WindowsSpyBlocker/tree/master/data/hosts) 数据
+  - Windows 操作系统使用的隐私跟踪域名 [@crazy-max/WindowsSpyBlocker/hosts/spy.txt](https://github.com/crazy-max/WindowsSpyBlocker/blob/master/data/hosts/spy.txt) 加入到 `geosite:win-spy` 类别中
+  - [**慎用**] Windows 操作系统使用的系统升级域名 [@crazy-max/WindowsSpyBlocker/hosts/update.txt](https://github.com/crazy-max/WindowsSpyBlocker/blob/master/data/hosts/update.txt) 加入到 `geosite:win-update` 类别中
+  - [**慎用**] Windows 操作系统附加的隐私跟踪域名 [@crazy-max/WindowsSpyBlocker/hosts/extra.txt](https://github.com/crazy-max/WindowsSpyBlocker/blob/master/data/hosts/extra.txt) 加入到 `geosite:win-extra` 类别中
+  - 关于这三个类别的使用方式，请参考下面 [geosite 的 Routing 配置方式](https://github.com/Loyalsoldier/v2ray-rules-dat#geositedat-1)
 - **加入更多代理域名**：通过仓库 [@GeQ1an/Rules](https://github.com/GeQ1an/Rules/tree/master/QuantumultX) 和 [@lhie1/Rules](https://github.com/lhie1/Rules/tree/master) 获取更多代理域名，并加入到 `geosite:geolocation-!cn` 类别中
 - **可添加自定义直连、代理和广告域名**：由于上游域名列表更新缓慢或缺失某些域名，所以引入**需要添加的域名**列表。[`hidden 分支`](https://github.com/Loyalsoldier/v2ray-rules-dat/tree/hidden)里的三个文件 `direct.txt`、`proxy.txt` 和 `reject.txt`，分别存放自定义的需要添加的直连、代理、广告域名，最终分别加入到 `geosite:cn`、`geosite:geolocation-!cn` 和 `geosite:category-ads-all` 类别中
 - **可移除自定义直连、代理和广告域名**：由于上游域名列表存在需要被移除的域名，所以引入**需要移除的域名**列表。[`hidden 分支`](https://github.com/Loyalsoldier/v2ray-rules-dat/tree/hidden)里的三个文件 `direct-need-to-remove.txt`、`proxy-need-to-remove.txt` 和 `reject-need-to-remove.txt`，分别存放自定义的需要从 `direct-list`（直连域名列表）、`proxy-list`（代理域名列表）和 `reject-list`（广告域名列表） 移除的域名
@@ -69,6 +71,15 @@
 - **Greatfire 域名列表 greatfire.txt**：
   - [https://raw.githubusercontent.com/Loyalsoldier/v2ray-rules-dat/release/greatfire.txt](https://raw.githubusercontent.com/Loyalsoldier/v2ray-rules-dat/release/greatfire.txt)
   - [https://cdn.jsdelivr.net/gh/Loyalsoldier/v2ray-rules-dat@release/greatfire.txt](https://cdn.jsdelivr.net/gh/Loyalsoldier/v2ray-rules-dat@release/greatfire.txt)
+- **Windows 操作系统使用的隐私跟踪域名列表 win-spy.txt**：
+  - [https://raw.githubusercontent.com/Loyalsoldier/v2ray-rules-dat/release/win-spy.txt](https://raw.githubusercontent.com/Loyalsoldier/v2ray-rules-dat/release/win-spy.txt)
+  - [https://cdn.jsdelivr.net/gh/Loyalsoldier/v2ray-rules-dat@release/win-spy.txt](https://cdn.jsdelivr.net/gh/Loyalsoldier/v2ray-rules-dat@release/win-spy.txt)
+- **Windows 操作系统使用的系统升级域名列表 win-update.txt**：
+  - [https://raw.githubusercontent.com/Loyalsoldier/v2ray-rules-dat/release/win-update.txt](https://raw.githubusercontent.com/Loyalsoldier/v2ray-rules-dat/release/win-update.txt)
+  - [https://cdn.jsdelivr.net/gh/Loyalsoldier/v2ray-rules-dat@release/win-update.txt](https://cdn.jsdelivr.net/gh/Loyalsoldier/v2ray-rules-dat@release/win-update.txt)
+- **Windows 操作系统使用的附加隐私跟踪域名列表 win-extra.txt**：
+  - [https://raw.githubusercontent.com/Loyalsoldier/v2ray-rules-dat/release/win-extra.txt](https://raw.githubusercontent.com/Loyalsoldier/v2ray-rules-dat/release/win-extra.txt)
+  - [https://cdn.jsdelivr.net/gh/Loyalsoldier/v2ray-rules-dat@release/win-extra.txt](https://cdn.jsdelivr.net/gh/Loyalsoldier/v2ray-rules-dat@release/win-extra.txt)
 
 **使用方式**：
 
@@ -126,7 +137,17 @@ scoop install v2ray-rules-dat
 
 ### geosite.dat
 
-跟 V2Ray 官方 `geosite.dat` 配置方式相同。`geosite:apple-cn` 和 `geosite:google-cn` 为本项目特有的两个类别，分别包含 [@felixonmars/dnsmasq-china-list/apple.china.conf](https://github.com/felixonmars/dnsmasq-china-list/blob/master/apple.china.conf) 和 [@felixonmars/dnsmasq-china-list/google.china.conf](https://github.com/felixonmars/dnsmasq-china-list/blob/master/google.china.conf) 文件里的域名，供希望 Apple 和 Google 域名直连（不走代理）的用户使用。在 Routing 配置中，类别越靠前（上），优先级越高，所以 `geosite:apple-cn` 和 `geosite:google-cn` 要放置在 `geosite:geolocation-!cn` 前（上）面。配置参考下面 👇👇👇
+跟 V2Ray 官方 `geosite.dat` 配置方式相同。相比官方 `geosite.dat` 文件，本项目特有的类别：
+
+- `geosite:apple-cn`：包含 [@felixonmars/dnsmasq-china-list/apple.china.conf](https://github.com/felixonmars/dnsmasq-china-list/blob/master/apple.china.conf) 文件里的域名，供希望 Apple 域名直连（不走代理）的用户使用。
+- `geosite:google-cn`：包含 [@felixonmars/dnsmasq-china-list/google.china.conf](https://github.com/felixonmars/dnsmasq-china-list/blob/master/google.china.conf) 文件里的域名，供希望 Google 域名直连（不走代理）的用户使用。
+- `geosite:win-spy`：包含 [@crazy-max/WindowsSpyBlocker/hosts/spy.txt](https://github.com/crazy-max/WindowsSpyBlocker/blob/master/data/hosts/spy.txt) 文件里的域名，供希望屏蔽 Windows 操作系统隐私跟踪域名的用户使用。
+- [**慎用**]`geosite:win-update`：包含 [@crazy-max/WindowsSpyBlocker/hosts/update.txt](https://github.com/crazy-max/WindowsSpyBlocker/blob/master/data/hosts/update.txt) 文件里的域名，供希望屏蔽 Windows 操作系统自动升级的用户使用。
+- [**慎用**]`geosite:win-extra`：包含 [@crazy-max/WindowsSpyBlocker/hosts/extra.txt](https://github.com/crazy-max/WindowsSpyBlocker/blob/master/data/hosts/extra.txt) 文件里的域名，供希望屏蔽 Windows 操作系统附加隐私跟踪域名的用户使用。
+
+> ⚠️注意：在 Routing 配置中，类别越靠前（上），优先级越高，所以 `geosite:apple-cn` 和 `geosite:google-cn` 要放置在 `geosite:geolocation-!cn` 前（上）面。
+
+配置参考下面 👇👇👇
 
 **白名单模式 Routing 配置方式**：
 
@@ -137,7 +158,8 @@ scoop install v2ray-rules-dat
       "type": "field",
       "outboundTag": "Reject",
       "domain": [
-        "geosite:category-ads-all"
+        "geosite:category-ads-all",
+        "geosite:win-spy"
       ]
     },
     {
@@ -182,7 +204,8 @@ scoop install v2ray-rules-dat
       "type": "field",
       "outboundTag": "Reject",
       "domain": [
-        "geosite:category-ads-all"
+        "geosite:category-ads-all",
+        "geosite:win-spy"
       ]
     },
     {
@@ -198,51 +221,27 @@ scoop install v2ray-rules-dat
       "type": "field",
       "outboundTag": "Proxy",
       "ip": [
-        "149.154.167.99/32",
-        "149.154.175.10/32",
-        "149.154.167.40/32",
-        "149.154.167.42/32",
-        "149.154.175.117/32",
-        "149.154.175.50/32",
-        "149.154.167.50/32",
-        "149.154.167.51/32",
-        "149.154.175.100/32",
-        "149.154.167.91/32",
-        "149.154.167.90/32",
-        "149.154.165.120/32",
-        "149.154.166.120/32",
-        "149.154.164.250/32",
-        "149.154.167.117/32",
-        "149.154.167.118/32",
-        "149.154.167.192/27",
-        "149.154.164.8/29",
-        "91.108.8.0/27",
-        "91.108.12.0/27",
-        "91.108.16.0/27",
-        "91.108.56.0/24",
-        "91.108.4.0/24",
+        "109.239.140.0/24",
         "149.154.160.0/22",
         "149.154.164.0/22",
         "149.154.168.0/22",
         "149.154.172.0/22",
-        "91.108.56.0/22",
-        "91.108.4.0/22",
-        "91.108.8.0/22",
-        "91.108.16.0/22",
+        "67.198.55.0/24",
         "91.108.12.0/22",
-        "149.154.160.0/20",
-        "2001:b28:f23d:f001::e/128",
-        "2001:67c:4e8:f002::e/128",
-        "2001:b28:f23d:f003::e/128",
-        "2001:b28:f23d:f001::a/128",
-        "2001:67c:4e8:f002::a/128",
-        "2001:b28:f23d:f003::a/128",
-        "2001:67c:4e8:f004::a/128",
-        "2001:b28:f23f:f005::a/128",
-        "2001:67c:4e8:fa60::/64",
+        "91.108.16.0/22",
+        "91.108.20.0/22",
+        "91.108.20.0/23",
+        "91.108.4.0/22",
+        "91.108.56.0/22",
+        "91.108.56.0/23",
+        "91.108.8.0/22",
+        "95.161.64.0/20",
+        "95.161.84.0/23",
+        "2001:67c:4e8::/48",
+        "2001:b28:f23c::/48",
         "2001:b28:f23d::/48",
         "2001:b28:f23f::/48",
-        "2001:67c:4e8::/48"
+        "2001:b28:f242::/48"
       ]
     },
     {
@@ -327,7 +326,7 @@ scoop install v2ray-rules-dat
 - 下面客户端配置使 V2Ray 在本机开启 SOCKS 代理（监听 1080 端口）和 HTTP 代理（监听 2080 端口），允许局域网内其他设备连接并使用代理
 - BT 流量统统直连（实测依然会有部分 BT 流量走代理，尚不清楚是不是 V2Ray 的 bug。如果服务商禁止 BT 下载的话，请不要为下载软件设置代理）
 - 最后，不命中任何路由规则的请求和流量，统统走代理
-- `outbounds` 里的第一个大括号内的配置，即为 V2Ray 代理服务的配置。请根据自身需求进行修改，并参照 V2Ray 官网配置说明中的 [配置 > Outbounds > OutboundObject](https://www.v2fly.org/chapter_02/outbounds.html#outboundobject) 部分进行补全
+- `outbounds` 里的第一个大括号内的配置，即为 V2Ray 代理服务的配置。请根据自身需求进行修改，并参照 V2Ray 官网配置文档中的 [配置 > Outbounds > OutboundObject](https://www.v2fly.org/config/outbounds.html#outboundobject) 部分进行补全
 
 ```json
 {
@@ -439,7 +438,8 @@ scoop install v2ray-rules-dat
         "type": "field",
         "outboundTag": "Reject",
         "domain": [
-          "geosite:category-ads-all"
+          "geosite:category-ads-all",
+          "geosite:win-spy"
         ]
       },
       {
@@ -513,6 +513,7 @@ scoop install v2ray-rules-dat
 - [@AdGuard/DNS-filter](https://kb.adguard.com/en/general/adguard-ad-filters#dns-filter)
 - [@PeterLowe/adservers](https://pgl.yoyo.org/adservers)
 - [@DanPollock/hosts](https://someonewhocares.org/hosts)
+- [@crazy-max/WindowsSpyBlocker](https://github.com/crazy-max/WindowsSpyBlocker)
 - [@kidonng/sushi](https://github.com/kidonng/sushi)
 
 ## 项目 Star 数增长趋势
