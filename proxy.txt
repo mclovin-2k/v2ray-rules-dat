@@ -3,6 +3,7 @@ gradle.com
 gradle-dn.com
 telemetr.io
 androidfilehost.com
+userupload.net
 manhuaren.com
 cdndm5.com
 copymanga.com
