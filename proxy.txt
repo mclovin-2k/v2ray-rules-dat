@@ -2,6 +2,7 @@ gradle.org
 gradle.com
 gradle-dn.com
 telemetr.io
+opengapps.org
 androidfilehost.com
 userupload.net
 manhuaren.com
