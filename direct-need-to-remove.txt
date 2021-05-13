@@ -12,12 +12,6 @@ dm5.com
 dm530.net
 duanzhihu.com
 dysfz.cc
-full:checkin.gstatic.com
-full:connectivitycheck.gstatic.com
-full:csi.gstatic.com
-full:fonts.gstatic.com
-full:ssl.gstatic.com
-full:www.gstatic.com
 galaxymacau.com
 galstars.net
 haitum.com
