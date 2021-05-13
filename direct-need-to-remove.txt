@@ -7,6 +7,12 @@ baidu.jp
 bussou.com
 busytrade.com
 cdndm5.com
+checkin.gstatic.com
+connectivitycheck.gstatic.com
+csi.gstatic.com
+fonts.gstatic.com
+ssl.gstatic.com
+www.gstatic.com
 cnpolitics.org
 dm5.com
 dm530.net
