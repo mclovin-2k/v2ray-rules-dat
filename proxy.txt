@@ -2,6 +2,7 @@ gradle.org
 gradle.com
 gradle-dn.com
 telemetr.io
+dyncdn2.com
 opengapps.org
 androidfilehost.com
 mobilism.org
